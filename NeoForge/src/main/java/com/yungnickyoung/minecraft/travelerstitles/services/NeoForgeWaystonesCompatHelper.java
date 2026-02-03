@@ -8,6 +8,7 @@ import net.blay09.mods.waystones.api.Waystone;
 import net.blay09.mods.waystones.api.WaystoneTypes;
 import net.blay09.mods.waystones.api.event.WaystonesListReceivedEvent;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.NeoForge;
@@ -56,6 +57,9 @@ public class NeoForgeWaystonesCompatHelper implements IWaystonesCompatHelper {
 
     private void updateClosestWaystone(final PlayerTickEvent.Post event) {
         Player player = event.getEntity();
+        if (player != Minecraft.getInstance().player) {
+            return;
+        }
         waystoneUpdateTimer++;
 
         if (waystoneUpdateTimer % 10 == 0) {
