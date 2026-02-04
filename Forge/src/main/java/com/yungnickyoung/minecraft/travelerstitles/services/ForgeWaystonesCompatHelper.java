@@ -7,6 +7,7 @@ import com.yungnickyoung.minecraft.travelerstitles.render.TitleRenderer;
 import net.blay09.mods.waystones.api.IWaystone;
 import net.blay09.mods.waystones.api.KnownWaystonesEvent;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -49,6 +50,9 @@ public class ForgeWaystonesCompatHelper implements IWaystonesCompatHelper {
 
     private void updateClosestWaystone(final TickEvent.PlayerTickEvent event) {
         Player player = event.player;
+        if (player != Minecraft.getInstance().player) {
+            return;
+        }
         waystoneUpdateTimer++;
 
         if (waystoneUpdateTimer % 10 == 0) {
